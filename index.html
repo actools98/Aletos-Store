@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trailwear · Ropa para senderismo</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="contenedor">
+            <h1 class="logo">🌲 Trailwear</h1>
+            <nav>
+                <a href="index.html" class="activo">Inicio</a>
+                <a href="productos.html">Productos</a>
+                <a href="carrito.html" id="ver-carrito">Carrito (<span id="contador-carrito">0</span>)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contenedor">
+        <section class="hero">
+            <h2>Equípate para la montaña</h2>
+            <p>Camisetas y gorras técnicas, con estilo y conciencia natural.</p>
+            <a href="productos.html" class="boton">Ver colección</a>
+        </section>
+
+        <section class="destacados">
+            <h3>Más vendidos</h3>
+            <div id="lista-destacados" class="grid-productos">
+                <!-- Se llenará con JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="contenedor">
+            <p>&copy; 2026 Trailwear · Hecho para explorar</p>
+        </div>
+    </footer>
+
+    <script src="js/productos.js"></script>
+    <script src="js/carrito.js"></script>
+</body>
+</html>

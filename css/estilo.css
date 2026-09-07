@@ -41,7 +41,7 @@ body {
     height: 120px;          /* Ajusta según tu preferencia */
     width: auto;
     display: block;
-    max-height: 60px;
+    max-height: 120px;
 }
 
 nav a {

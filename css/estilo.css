@@ -7,9 +7,9 @@
     --surface-color: #ffffff;
     --text-main: #2c2c2c;
     --text-muted: #6b6b6b;
-    --accent: #b87c5e;         /* Terracota */
+    --accent: #455238         /* Terracota */
     --accent-hover: #a06b4f;
-    --accent-dark: #2a3b2c;    /* Verde bosque oscuro (nuevo contraste) */
+    --accent-dark: #b87c5e;    /* Verde bosque oscuro (nuevo contraste) */
     
     /* Espaciado y bordes */
     --radius-md: 16px;

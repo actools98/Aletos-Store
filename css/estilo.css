@@ -72,7 +72,7 @@ body {
 }
 
 .logo-img {
-    height: 100px; /* Reducido ligeramente para el sticky header */
+    height: 120px; /* Reducido ligeramente para el sticky header */
     width: auto;
     display: block;
     transition: var(--transition);
@@ -307,7 +307,7 @@ nav a.activo {
     }
     
     .logo-img {
-        height: 65px;
+        height: 95px;
     }
     
     .grid-productos {

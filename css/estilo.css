@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-    background-color: #faf8f5;
+    background-color: #e8e2da;   /* Fondo más oscuro para contrastar con el logo */
     color: #2c2c2c;
     line-height: 1.6;
     padding: 0 1rem;
@@ -38,10 +38,10 @@ body {
 }
 
 .logo-img {
-    height: 120px;          /* Ajusta según tu preferencia */
+    height: 120px;
     width: auto;
     display: block;
-    max-height: 120px;
+    /* max-height eliminado */
 }
 
 nav a {
@@ -190,7 +190,7 @@ nav a.activo {
 /* Responsive */
 @media (max-width: 600px) {
     .logo-img {
-        height: 40px;
+        height: 80px;
     }
     nav a {
         margin-left: 0.8rem;

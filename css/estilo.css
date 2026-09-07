@@ -1,24 +1,31 @@
 /* =========================================
-   Variables Globales y Tema
+   Variables Globales y Tema (Ajustado al Verde #455238)
 ========================================= */
 :root {
-    /* Paleta de colores mejorada para senderismo */
-    --bg-color: #e8e2da;
-    --surface-color: #ffffff;
-    --text-main: #2c2c2c;
-    --text-muted: #6b6b6b;
-    --accent: #455238         /* Terracota */
-    --accent-hover: #a06b4f;
-    --accent-dark: #b87c5e;    /* Verde bosque oscuro (nuevo contraste) */
+    /* Fondos */
+    --bg-color: #455238;          /* Tu nuevo verde bosque oscuro */
+    --surface-color: #f4f0ea;     /* Tono arena claro para las tarjetas de productos */
+    
+    /* Textos sobre fondo verde oscuro (Hero, Nav, Footer) */
+    --text-light: #f9f8f6;        
+    --text-light-muted: #c3caba;  /* Un verde grisáceo muy claro */
+    
+    /* Textos sobre tarjetas claras (Productos, Carrito) */
+    --text-dark: #2c2c2c;
+    --text-dark-muted: #6b6b6b;
+    
+    /* Acentos (Terracota, hace un contraste hermoso con el verde) */
+    --accent: #d28c68;            
+    --accent-hover: #e59d77;
     
     /* Espaciado y bordes */
     --radius-md: 16px;
     --radius-pill: 50px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
-    /* Sombras modernas */
-    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 12px 24px -4px rgba(0, 0, 0, 0.08);
+    /* Sombras modernas (Más intensas para destacar sobre fondo oscuro) */
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 12px 24px -4px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================================
@@ -37,7 +44,7 @@ html {
 body {
     font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
     background-color: var(--bg-color);
-    color: var(--text-main);
+    color: var(--text-light); /* Texto principal ahora es claro */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
@@ -57,9 +64,10 @@ body {
     top: 0;
     z-index: 1000;
     padding: 1rem 0;
-    background-color: rgba(232, 226, 218, 0.85); /* Semitransparente */
-    backdrop-filter: blur(10px); /* Efecto vidrio */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    /* Transparencia basada en tu color #455238 (rgb 69, 82, 56) */
+    background-color: rgba(69, 82, 56, 0.85); 
+    backdrop-filter: blur(10px); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: var(--transition);
 }
 
@@ -72,7 +80,7 @@ body {
 }
 
 .logo-img {
-    height: 120px; /* Reducido ligeramente para el sticky header */
+    height: 80px;
     width: auto;
     display: block;
     transition: var(--transition);
@@ -85,7 +93,7 @@ nav {
 }
 
 nav a {
-    color: var(--text-main);
+    color: var(--text-light);
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
@@ -93,7 +101,6 @@ nav a {
     position: relative;
 }
 
-/* Efecto de línea debajo del link al hacer hover */
 nav a::after {
     content: '';
     position: absolute;
@@ -126,16 +133,16 @@ nav a.activo {
 }
 
 .hero h2 {
-    font-size: clamp(2rem, 5vw, 3.5rem); /* Tipografía fluida */
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 800;
-    color: var(--accent-dark);
+    color: var(--text-light); /* H2 en color claro */
     line-height: 1.1;
     letter-spacing: -0.5px;
     margin-bottom: 1.2rem;
 }
 
 .hero p {
-    color: var(--text-muted);
+    color: var(--text-light-muted);
     font-size: clamp(1.1rem, 2vw, 1.25rem);
     margin-bottom: 2.5rem;
 }
@@ -148,7 +155,7 @@ nav a.activo {
     justify-content: center;
     align-items: center;
     background: var(--accent);
-    color: #fff;
+    color: #fff; /* Siempre blanco para contraste */
     padding: 0.9rem 2.5rem;
     text-decoration: none;
     border-radius: var(--radius-pill);
@@ -157,13 +164,13 @@ nav a.activo {
     transition: var(--transition);
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(184, 124, 94, 0.3);
+    box-shadow: 0 4px 15px rgba(210, 140, 104, 0.3);
 }
 
 .boton:hover {
     background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(184, 124, 94, 0.4);
+    box-shadow: 0 6px 20px rgba(210, 140, 104, 0.5);
 }
 
 /* =========================================
@@ -171,146 +178,22 @@ nav a.activo {
 ========================================= */
 .grid-productos {
     display: grid;
-    /* auto-fit hace que se adapte sin media queries extra */
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2.5rem;
     margin: 3rem 0;
 }
 
 .producto {
-    background: var(--surface-color);
-    border-radius: var(--radius-md);
-    padding: 1.2rem;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-}
+    background: var(--surface-color); /* Fondo claro para que resalte la foto */
+    color: var(--text-dark); /* Texto oscuro para laEl color **#455238** es un tono verde oliva oscuro, muy elegante y con un toque terroso. Dado que es un fondo profundo que absorbe mucha luz, es fundamental acompañarlo con tonos luminosos para garantizar una buena legibilidad y evitar que el diseño se sienta pesado.
 
-.producto:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-md);
-}
+Aquí tienes cómo aplicarlo y una selección de colores que lo complementan perfectamente para equilibrar la oscuridad.
 
-.producto img {
-    width: 100%;
-    aspect-ratio: 4/5; /* Mantiene proporción moderna perfecta */
-    object-fit: cover;
-    border-radius: 10px;
-    background: var(--bg-color);
-    margin-bottom: 1.2rem;
-    transition: transform 0.5s ease;
-}
+### Aplicación del Fondo
 
-.producto:hover img {
-    transform: scale(1.03); /* Ligero zoom al hacer hover */
-}
+Para aplicarlo como fondo principal en tu proyecto web, puedes usar esta regla básica de CSS:
 
-.producto h4 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--text-main);
-}
-
-.producto .precio {
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin: 0.5rem 0 1rem;
-}
-
-.producto button {
-    background: transparent;
-    border: 2px solid var(--accent);
-    color: var(--accent);
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: var(--transition);
-    margin-top: auto; /* Empuja el botón al fondo si los títulos varían en altura */
-    width: 100%;
-}
-
-.producto button:hover {
-    background: var(--accent);
-    color: #fff;
-}
-
-/* =========================================
-   Footer & Carrito
-========================================= */
-.footer {
-    margin-top: 6rem;
-    padding: 3rem 0;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    text-align: center;
-    color: var(--text-muted);
-}
-
-.carrito-vacio {
-    text-align: center;
-    padding: 4rem 1rem;
-    color: var(--text-muted);
-    background: var(--surface-color);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-}
-
-.lista-carrito {
-    list-style: none;
-    background: var(--surface-color);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
-}
-
-.lista-carrito li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--bg-color);
-}
-
-.lista-carrito li:last-child {
-    border-bottom: none;
-}
-
-.total {
-    text-align: right;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent-dark);
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 2px dashed var(--bg-color);
-}
-
-/* =========================================
-   Responsive Ajustes Finales
-========================================= */
-@media (max-width: 768px) {
-    .header .contenedor {
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-    
-    .logo-img {
-        height: 95px;
-    }
-    
-    .grid-productos {
-        gap: 1.5rem;
-    }
+```css
+body {
+    background-color: #455238;
 }

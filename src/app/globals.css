@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #1A5D3A;
+  --brand-dark: #0D3B22;
+  --brand-light: #E8F5E9;
+  --bg: #F3F3F1;
+  --line: #E2E8F0;
+}
+
+html, body { background: var(--bg); color: #121212; }
+body { font-family: var(--font-inter), Inter, sans-serif; }
+
+.font-display { font-family: var(--font-archivo), Archivo, sans-serif; }
+
+.btn-store {
+  @apply inline-flex items-center justify-center bg-brand-black text-white px-8 py-4 text-[13px] font-semibold uppercase tracking-wider rounded-none hover:bg-brand transition-colors;
+}
+.btn-store-outline {
+  @apply inline-flex items-center justify-center border border-brand-black px-8 py-4 text-[13px] font-semibold uppercase tracking-wider hover:bg-brand-black hover:text-white transition-colors;
+}
+.btn-dash {
+  @apply inline-flex items-center justify-center bg-brand text-white px-5 py-2.5 text-[13px] font-medium rounded-full hover:bg-brand-dark transition-colors;
+}
+.btn-dash-ghost {
+  @apply inline-flex items-center justify-center border border-line-light bg-white px-5 py-2.5 text-[13px] font-medium rounded-full hover:bg-slate-50 transition-colors;
+}
+.input {
+  @apply w-full border border-line-light bg-white rounded-md px-4 py-2.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition;
+}
+.label { @apply block text-xs font-medium text-text-secondary uppercase tracking-wider mb-1.5; }
+.card { @apply bg-white rounded-2xl border border-line-light shadow-soft; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }

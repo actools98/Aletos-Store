@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("admin") // admin | editor | viewer
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  parentId  String?
+  parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children  Category[] @relation("CategoryTree")
+  products  Product[]
+  createdAt DateTime   @default(now())
+}
+
+model Product {
+  id          String           @id @default(cuid())
+  name        String
+  slug        String           @unique
+  description String?
+  price       Float
+  sku         String?          @unique
+  stock       Int              @default(0)
+  active      Boolean          @default(true)
+  tags        String?
+  sortOrder   Int              @default(0)
+  categoryId  String?
+  category    Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images      ProductImage[]
+  variants    ProductVariant[]
+  orderItems  OrderItem[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String?
+  sortOrder Int     @default(0)
+}
+
+model ProductVariant {
+  id         String      @id @default(cuid())
+  productId  String
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name       String
+  sku        String?     @unique
+  price      Float?
+  stock      Int         @default(0)
+  imageUrl   String?
+  orderItems OrderItem[]
+  createdAt  DateTime    @default(now())
+}
+
+model Order {
+  id             String      @id @default(cuid())
+  orderNumber    String      @unique
+  customerName   String
+  customerEmail  String
+  customerPhone  String?
+  address        String
+  city           String?
+  postalCode     String?
+  country        String?
+  notes          String?
+  internalNotes  String?
+  status         String      @default("pendiente")
+  paymentStatus  String      @default("pendiente")
+  shippingStatus String      @default("pendiente")
+  trackingNumber String?
+  subtotal       Float
+  tax            Float       @default(0)
+  shipping       Float       @default(0)
+  total          Float
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  items          OrderItem[]
+}
+
+model OrderItem {
+  id          String          @id @default(cuid())
+  orderId     String
+  order       Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String?
+  product     Product?        @relation(fields: [productId], references: [id], onDelete: SetNull)
+  variantId   String?
+  variant     ProductVariant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+  name        String
+  variantName String?
+  price       Float
+  quantity    Int
+  imageUrl    String?
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  filename  String
+  alt       String?
+  size      Int?
+  mimeType  String?
+  createdAt DateTime @default(now())
+}

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { slugify } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'   // 👈
+
 export async function GET() {
   const products = await prisma.product.findMany({
     include: { images: { orderBy: { sortOrder: 'asc' } }, variants: true, category: true },

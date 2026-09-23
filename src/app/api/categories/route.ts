@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { slugify } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'   // 👈
+
 export async function GET() {
   const cats = await prisma.category.findMany({
     include: { children: true, _count: { select: { products: true } } },

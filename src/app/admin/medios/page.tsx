@@ -43,4 +43,36 @@ export default function Media() {
         </div>
         <label className="btn-dash cursor-pointer">
           {busy ? 'Subiendo…' : '+ Subir imágenes'}
-          <input type="file" accept="image/*" multiple className="hidden" onChange={onUpload
+          <input type="file" accept="image/*" multiple className="hidden" onChange={onUpload} />
+        </label>
+      </header>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        {items.map((m) => (
+          <div key={m.id} className="group relative aspect-square bg-white rounded-lg overflow-hidden border border-line-light">
+            <img src={m.url} className="w-full h-full object-cover cursor-pointer" alt={m.alt || ''} onClick={() => setSelected({ ...m })} />
+            <button onClick={() => remove(m.id)}
+              className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 text-xs opacity-0 group-hover:opacity-100 transition">
+              ×
+            </button>
+          </div>
+        ))}
+        {items.length === 0 && <p className="col-span-full text-sm text-text-secondary">Sin imágenes. Sube tu primera imagen.</p>}
+      </div>
+
+      {selected && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-6" onClick={() => setSelected(null)}>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <img src={selected.url} className="rounded-lg mb-4 max-h-72 mx-auto" alt="" />
+            <label className="label">Texto alternativo (alt)</label>
+            <input className="input mb-4" value={selected.alt || ''} onChange={(e) => setSelected({ ...selected, alt: e.target.value })} />
+            <div className="flex gap-2">
+              <button onClick={saveAlt} className="btn-dash flex-1">Guardar</button>
+              <button onClick={() => setSelected(null)} className="btn-dash-ghost flex-1">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}

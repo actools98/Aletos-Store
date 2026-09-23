@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useCart } from '@/context/CartContext'
+import { eur } from '@/lib/utils'
 
 export default function AddToCart({ product }: { product: any }) {
   const { add } = useCart()
@@ -26,7 +27,7 @@ export default function AddToCart({ product }: { product: any }) {
   return (
     <div className="space-y-6">
       <div className="flex items-baseline justify-between">
-        <p className="font-display text-3xl font-bold">{new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(price)}</p>
+        <p className="font-display text-3xl font-bold">{eur(price)}</p>
         <p className="text-sm text-text-secondary">{canBuy ? `${stock} en stock` : 'Agotado'}</p>
       </div>
 

@@ -39,11 +39,11 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer())
     const ext = EXT_MAP[file.type] || path.extname(file.name).toLowerCase() || '.bin'
     const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`
-    const dir = path.join(process.cwd(), 'public', 'uploads')
+    const dir = process.env.UPLOAD_DIR || '/app/data/uploads'
     await mkdir(dir, { recursive: true })
     await writeFile(path.join(dir, filename), buffer)
 
-    const url = `/uploads/${filename}`
+    const url = `/api/uploads/${filename}`
     const media = await prisma.media.create({
       data: {
         url,

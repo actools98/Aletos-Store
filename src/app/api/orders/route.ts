@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { orderNumber } from '@/lib/utils'
+import { sendOrderEmails } from '@/lib/mail'
 
 export const dynamic = 'force-dynamic'   // 👈
 
@@ -58,7 +59,12 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // TODO: enviar email de notificación cuando se configure
+  // Correos de confirmación (comprador + admin). Si falla, no rompe la compra.
+  try {
+    await sendOrderEmails(order, items)
+  } catch (e) {
+    console.error('[mail] fallo inesperado:', e)
+  }
 
   return NextResponse.json({ ok: true, orderId: order.id, orderNumber: order.orderNumber })
 }
